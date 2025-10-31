@@ -15,17 +15,17 @@ public class Movie extends AbstractEntity{
     private String name; //Поле не может быть null, Строка не может быть пустой
 
 //    @Column(name = "coordinates", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name = "coordinates_id",
             nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "fk_movie_coordinates_id",
-                    foreignKeyDefinition = "FOREIGN KEY (coordinates_id) REFERENCES ms_coordinates(id)"
+                    name = "fk_ms_movie_coordinates_id",
+                    foreignKeyDefinition = "FOREIGN KEY (coordinates_id) REFERENCES ms_coordinates(id) ON DELETE CASCADE"
             )
     )
-    @CascadeOnDelete
+//    @CascadeOnDelete
     private Coordinates coordinates; //Поле не может быть null
 
     @Column(name = "creationDate", nullable = false)
@@ -44,42 +44,42 @@ public class Movie extends AbstractEntity{
     @Column(name = "mpaaRating", nullable = false)
     private MpaaRating mpaaRating; //Поле не может быть null
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
 //    @Column(name = "director", nullable = false)
     @JoinColumn(
             name = "director_id",
             nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "fk_movie_director_id",
-                    foreignKeyDefinition = "FOREIGN KEY (director_id) REFERENCES ms_person(id) DELETE ON CASCADE"
+                    name = "fk_ms_movie_director_id",
+                    foreignKeyDefinition = "FOREIGN KEY (director_id) REFERENCES ms_person(id) ON DELETE CASCADE"
             )
     )
-    @CascadeOnDelete
+//    @CascadeOnDelete
     private Person director; //Поле не может быть null
 
 //    @Column(name = "screenwriter")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name = "screenwriter_id",
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                name = "fk_movie_screenwriter_id",
-                foreignKeyDefinition = "FOREIGN KEY (screenwriter_id) REFERENCES ms_person(id) DELETE ON CASCADE"
+                name = "fk_ms_movie_screenwriter_id",
+                foreignKeyDefinition = "FOREIGN KEY (screenwriter_id) REFERENCES ms_person(id) ON DELETE CASCADE"
             )
     )
     @CascadeOnDelete
     private Person screenwriter;
 
 //    @Column(name = "operator", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name = "operator_id",
             nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
-                    name = "fk_movie_operator_id",
-                    foreignKeyDefinition = "FOREIGN KEY (operator_id) REFERENCES ms_person(id) DELETE ON CASCADE"
+                    name = "fk_ms_movie_operator_id",
+                    foreignKeyDefinition = "FOREIGN KEY (operator_id) REFERENCES ms_person(id) ON DELETE CASCADE"
             )
     )
     private Person operator; //Поле не может быть null
