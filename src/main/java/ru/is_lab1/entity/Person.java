@@ -1,12 +1,14 @@
 package ru.is_lab1.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 import ru.is_lab1.entity.enums.Color;
 import ru.is_lab1.entity.enums.Country;
 
 @Entity
 @Table(name = "ms_person")
+@Data
 public class Person extends AbstractEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

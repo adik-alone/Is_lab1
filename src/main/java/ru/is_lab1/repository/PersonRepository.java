@@ -12,13 +12,13 @@ public class PersonRepository extends AbstractRepository<Person>{
 
     @Override
     public List<Person> findAll() {
-        return em.createQuery("SELECT p FROM ms_person p", Person.class)
+        return em.createQuery("SELECT p FROM Person p", Person.class)
                 .getResultList();
     }
 
     @Override
     public List<Person> findPage(int page, int size) {
-        return em.createQuery("SELECT p FROM ms_person p", Person.class)
+        return em.createQuery("SELECT p FROM Person p", Person.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .getResultList();
