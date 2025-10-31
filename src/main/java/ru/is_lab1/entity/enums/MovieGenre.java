@@ -1,4 +1,4 @@
-package ru.is_lab1.entity;
+package ru.is_lab1.entity.enums;
 
 public enum MovieGenre {
     ACTION,
