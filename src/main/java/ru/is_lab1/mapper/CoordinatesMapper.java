@@ -1,8 +1,10 @@
 package ru.is_lab1.mapper;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import ru.is_lab1.dto.request.CoordinatesRequest;
 import ru.is_lab1.entity.Coordinates;
 
+@ApplicationScoped
 public class CoordinatesMapper {
 
     public Coordinates toEntity(CoordinatesRequest request){
