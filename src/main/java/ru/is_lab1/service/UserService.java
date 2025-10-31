@@ -1,9 +1,7 @@
-package com.example.service;
+package ru.is_lab1.service;
 
-import com.example.entity.User;
-import com.example.repository.UserRepository;
-import jakarta.ejb.EJB;
-import jakarta.ejb.Stateless;
+import ru.is_lab1.entity.User;
+import ru.is_lab1.repository.UserRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

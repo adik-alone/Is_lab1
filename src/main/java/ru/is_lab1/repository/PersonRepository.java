@@ -1,6 +1,6 @@
-package com.example.repository;
+package ru.is_lab1.repository;
 
-import com.example.entity.Person;
+import ru.is_lab1.entity.Person;
 import java.util.List;
 import java.util.Optional;
 

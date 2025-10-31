@@ -1,7 +1,6 @@
-package com.example.repository;
+package ru.is_lab1.repository;
 
-import com.example.entity.AbstractEntity;
-import com.example.entity.Location;
+import ru.is_lab1.entity.Location;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -23,13 +22,13 @@ public class LocationRepository extends AbstractRepository<Location>{
 
     @Override
     public List<Location> findAll() {
-        return em.createQuery("SELECT l FROM ms_location l", Location.class)
+        return em.createQuery("SELECT l FROM Location l", Location.class)
                 .getResultList();
     }
 
     @Override
     public List<Location> findPage(int page, int size){
-        return em.createQuery("SELECT l FROM ms_location l", Location.class)
+        return em.createQuery("SELECT l FROM Location l", Location.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .getResultList();

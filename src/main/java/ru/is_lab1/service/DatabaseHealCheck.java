@@ -1,4 +1,4 @@
-package com.example.service;
+package ru.is_lab1.service;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;

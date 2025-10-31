@@ -1,12 +1,8 @@
-package com.example.rest;
+package ru.is_lab1.rest;
 
-import com.example.entity.User;
-import com.example.service.UserService;
-import jakarta.ejb.EJB;
+import ru.is_lab1.entity.User;
+import ru.is_lab1.service.UserService;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -20,9 +16,6 @@ public class UserResource {
 
     @Inject
     private UserService userService;
-
-//    @PersistenceContext(unitName = "myPostgresPU")
-//    EntityManager em;
 
     @GET
     public List<User> getAllUsers(){

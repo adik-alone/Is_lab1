@@ -1,7 +1,6 @@
-package com.example.repository;
+package ru.is_lab1.repository;
 
-import com.example.entity.User;
-import jakarta.ejb.Stateless;
+import ru.is_lab1.entity.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

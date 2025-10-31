@@ -1,4 +1,4 @@
-package com.example.repository;
+package ru.is_lab1.repository;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;

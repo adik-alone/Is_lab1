@@ -1,6 +1,6 @@
-package com.example.repository;
+package ru.is_lab1.repository;
 
-import com.example.entity.Coordinates;
+import ru.is_lab1.entity.Coordinates;
 
 import java.util.List;
 import java.util.Optional;

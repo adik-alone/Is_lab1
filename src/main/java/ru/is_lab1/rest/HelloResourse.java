@@ -1,4 +1,4 @@
-package com.example.rest;
+package ru.is_lab1.rest;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

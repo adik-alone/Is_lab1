@@ -1,10 +1,8 @@
-package com.example.repository;
+package ru.is_lab1.repository;
 
-import com.example.entity.AbstractEntity;
+import ru.is_lab1.entity.AbstractEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-
-import java.util.Optional;
 
 public abstract class AbstractRepository<T extends AbstractEntity> implements Repository<T> {
     @PersistenceContext(unitName = "myPostgresPU")
