@@ -7,9 +7,6 @@ import lombok.Data;
 @Table(name = "ms_coordinates")
 @Data
 public class Coordinates extends AbstractEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     @Column(name="x")
     private float x;
 

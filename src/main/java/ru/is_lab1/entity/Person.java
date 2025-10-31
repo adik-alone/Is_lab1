@@ -1,5 +1,6 @@
 package ru.is_lab1.entity;
 
+import jakarta.json.bind.annotation.JsonbTypeInfo;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
@@ -10,10 +11,6 @@ import ru.is_lab1.entity.enums.Country;
 @Table(name = "ms_person")
 @Data
 public class Person extends AbstractEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @Column(name = "name", nullable = false)
     private String name; //Поле не может быть null, Строка не может быть пустой
 
@@ -26,12 +23,16 @@ public class Person extends AbstractEntity{
     private Color hairColor; //Поле не может быть null
 
 //    @Column(name = "location", nullable = true)
+//    @JoinColumn(name = "location_id")
     @ManyToOne
     @JoinColumn(
             name = "location_id",
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "fk_person_location",
+                    foreignKeyDefinition = "FOREIGN KEY (location_id) REFERENCES ms_location(id) ON DELETE CASCADE"
+            )
     )
-    @CascadeOnDelete
     private Location location; //Поле может быть null
 
     @Column(name = "height")

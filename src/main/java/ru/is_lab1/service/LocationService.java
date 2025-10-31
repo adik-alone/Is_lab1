@@ -63,6 +63,7 @@ public class LocationService {
     }
     @Transactional
     public void deleteLocation(Long id){
+        logger.info("LocationService.deleteLocation");
         if (!repository.delete(id)){
             throw new RuntimeException("Location not found");
         }

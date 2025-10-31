@@ -8,9 +8,6 @@ import ru.is_lab1.entity.enums.MpaaRating;
 @Entity
 @Table(name = "ms_movie")
 public class Movie extends AbstractEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name; //Поле не может быть null, Строка не может быть пустой

@@ -21,11 +21,16 @@
             <!-- Автоматическое создание таблиц и последовательностей -->
 <!--            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>-->
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+<!--            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
+<!--            <property name="javax.persistence.schema-generation.script.action" value="create"/>-->
+<!--            <property name="javax.persistence.schema-generation.script.create-target" value="/tmp/eclipselink-ddl/create_ddl.sql"/>-->
 <!--             Для EclipseLink -->
 <!--            <property name="eclipselink.ddl-generation" value="create-tables"/>-->
-<!--            <property name="eclipselink.ddl-generation.output-mode" value="database"/>-->
+<!--            <property name="eclipselink.ddl-generation.output-mode" value="both"/>-->
 <!--            <property name="eclipselink.create-ddl-jdbc-file-name" value="create.sql"/>-->
 <!--            <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop.sql"/>-->
+<!--            <property name="eclipselink.application-location" value="/tmp/eclipselink-ddl"/>-->
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
 
             <!-- Настройки для PostgreSQL -->
 <!--            <property name="eclipselink.target-database" value="PostgreSQL"/>-->
@@ -46,18 +51,18 @@
     </persistence-unit>
 
     <!-- Альтернативный persistence-unit для RESOURCE_LOCAL транзакций -->
-    <persistence-unit name="myPostgresLocalPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+<!--    <persistence-unit name="myPostgresLocalPU" transaction-type="RESOURCE_LOCAL">-->
+<!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
 
-        <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:postgresql://your-remote-server.com:5432/mydatabase"/>
-            <property name="jakarta.persistence.jdbc.user" value="your_username"/>
-            <property name="jakarta.persistence.jdbc.password" value="your_password"/>
+<!--        <properties>-->
+<!--            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>-->
+<!--            <property name="jakarta.persistence.jdbc.url"-->
+<!--                      value="jdbc:postgresql://your-remote-server.com:5432/mydatabase"/>-->
+<!--            <property name="jakarta.persistence.jdbc.user" value="your_username"/>-->
+<!--            <property name="jakarta.persistence.jdbc.password" value="your_password"/>-->
 
-            <property name="eclipselink.logging.level" value="FINE"/>
-            <property name="eclipselink.target-database" value="PostgreSQL"/>
-        </properties>
-    </persistence-unit>
+<!--            <property name="eclipselink.logging.level" value="FINE"/>-->
+<!--            <property name="eclipselink.target-database" value="PostgreSQL"/>-->
+<!--        </properties>-->
+<!--    </persistence-unit>-->
 </persistence>
