@@ -13,13 +13,13 @@ public class MovieRepository extends AbstractRepository<Movie>{
 
     @Override
     public List<Movie> findAll() {
-        return em.createQuery("SELECT m FROM ms_movie m", Movie.class)
+        return em.createQuery("SELECT m FROM Movie m", Movie.class)
                 .getResultList();
     }
 
     @Override
     public List<Movie> findPage(int page, int size) {
-        return em.createQuery("SELECT m FROM ms_movie m", Movie.class)
+        return em.createQuery("SELECT m FROM Movie m", Movie.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .getResultList();

@@ -1,12 +1,14 @@
 package ru.is_lab1.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 import ru.is_lab1.entity.enums.MovieGenre;
 import ru.is_lab1.entity.enums.MpaaRating;
 
 @Entity
 @Table(name = "ms_movie")
+@Data
 public class Movie extends AbstractEntity{
 
     @Column(name = "name", nullable = false)
@@ -17,7 +19,11 @@ public class Movie extends AbstractEntity{
     @JoinColumn(
             name = "coordinates_id",
             nullable = false,
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "fk_movie_coordinates_id",
+                    foreignKeyDefinition = "FOREIGN KEY (coordinates_id) REFERENCES ms_coordinates(id)"
+            )
     )
     @CascadeOnDelete
     private Coordinates coordinates; //Поле не может быть null
@@ -43,7 +49,11 @@ public class Movie extends AbstractEntity{
     @JoinColumn(
             name = "director_id",
             nullable = false,
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "fk_movie_director_id",
+                    foreignKeyDefinition = "FOREIGN KEY (director_id) REFERENCES ms_person(id) DELETE ON CASCADE"
+            )
     )
     @CascadeOnDelete
     private Person director; //Поле не может быть null
@@ -52,7 +62,11 @@ public class Movie extends AbstractEntity{
     @ManyToOne
     @JoinColumn(
             name = "screenwriter_id",
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                name = "fk_movie_screenwriter_id",
+                foreignKeyDefinition = "FOREIGN KEY (screenwriter_id) REFERENCES ms_person(id) DELETE ON CASCADE"
+            )
     )
     @CascadeOnDelete
     private Person screenwriter;
@@ -62,7 +76,11 @@ public class Movie extends AbstractEntity{
     @JoinColumn(
             name = "operator_id",
             nullable = false,
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "fk_movie_operator_id",
+                    foreignKeyDefinition = "FOREIGN KEY (operator_id) REFERENCES ms_person(id) DELETE ON CASCADE"
+            )
     )
     private Person operator; //Поле не может быть null
 
