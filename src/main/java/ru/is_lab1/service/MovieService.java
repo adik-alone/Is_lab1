@@ -44,6 +44,7 @@ public class MovieService {
         return repository.findPage(page, size);
     }
 
+    @Transactional
     public Movie updateMovie(Long id, MovieRequest request){
         logger.info("MovieService.updateMovie: start");
         Optional<Movie> optionalMovie = repository.findById(id);
@@ -56,6 +57,7 @@ public class MovieService {
         return updatedMovie;
     }
 
+    @Transactional
     public void deleteMovie(Long id){
         if(!repository.delete(id)){
             throw new RuntimeException("Movie not found");

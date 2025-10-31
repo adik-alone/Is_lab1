@@ -19,8 +19,8 @@
         <!-- Свойства EclipseLink -->
         <properties>
             <!-- Автоматическое создание таблиц и последовательностей -->
-<!--            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>-->
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+<!--            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
 <!--            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
 <!--            <property name="javax.persistence.schema-generation.script.action" value="create"/>-->
 <!--            <property name="javax.persistence.schema-generation.script.create-target" value="/tmp/eclipselink-ddl/create_ddl.sql"/>-->
@@ -37,7 +37,7 @@
 <!--            <property name="eclipselink.jpa.sequence.default-sequence" value="SEQUENCE"/>-->
 
             <!-- Показывать SQL запросы -->
-            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+<!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="true"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
