@@ -23,4 +23,10 @@ public class PersonRepository extends AbstractRepository<Person>{
                 .setMaxResults(size)
                 .getResultList();
     }
+
+    public List<Person> directorsWithoutOscars(){
+        return em.createQuery("SELECT p FROM Person p " +
+                                "where NOT EXISTS(SELECT m FROM Movie m WHERE m.director = p AND m.oscarsCount > 0)", Person.class)
+                .getResultList();
+    }
 }

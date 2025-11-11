@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ru.is_lab1.entity.Person;
 import ru.is_lab1.entity.enums.MovieGenre;
 import ru.is_lab1.service.SpecialApplicationService;
 
@@ -36,5 +37,11 @@ public class SpecialApplicationController {
     public Response movieWithGoldenPalmCountEqualsValue(@QueryParam("value") int value){
         Long count = service.movieWithGoldenPalmEqualsValue(value);
         return Response.ok(count).build();
+    }
+    @GET
+    @Path("/directors-without-oscars")
+    public Response getDirectorsWithoutOscars(){
+        List<Person> directors = service.getDirectorsWithoutOscars();
+        return Response.ok(directors).build();
     }
 }
