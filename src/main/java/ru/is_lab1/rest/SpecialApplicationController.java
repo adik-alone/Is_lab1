@@ -1,5 +1,6 @@
 package ru.is_lab1.rest;
 
+import jakarta.faces.annotation.RequestParameterMap;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -28,5 +29,12 @@ public class SpecialApplicationController {
     public Response groupMovieByTotalBoxOffice(){
         List<Long> groupList = service.groupMovieByTotalBoxOffice();
         return Response.ok(groupList).build();
+    }
+
+    @GET
+    @Path("/movie-with-golden-palm-count-equals")
+    public Response movieWithGoldenPalmCountEqualsValue(@QueryParam("value") int value){
+        Long count = service.movieWithGoldenPalmEqualsValue(value);
+        return Response.ok(count).build();
     }
 }

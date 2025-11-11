@@ -40,4 +40,10 @@ public class MovieRepository extends AbstractRepository<Movie>{
         return em.createQuery("SELECT count(m) FROM Movie m GROUP BY m.totalBoxOffice", Long.class)
                 .getResultList();
     }
+
+    public Optional<Long> movieWithGoldenPalmEqualsValue(int value){
+        return Optional.ofNullable(em.createQuery("SELECT count(m) FROM Movie m WHERE m.goldenPalmCount = :value", Long.class)
+                .setParameter("value", value)
+                .getSingleResult());
+    }
 }

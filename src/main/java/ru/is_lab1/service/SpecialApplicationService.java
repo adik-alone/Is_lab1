@@ -39,9 +39,11 @@ public class SpecialApplicationService {
         return repository.groupMovieByTotalBoxOffice();
     }
 
-//    public Long movieWithGoldenPalmEqualsValue(){
-//
-//    }
+    public Long movieWithGoldenPalmEqualsValue(int value){
+        logger.info(" ================== SpecialService.movieWithGoldenPalmEqualsValue: run ===================");
+        Optional<Long> count = repository.movieWithGoldenPalmEqualsValue(value);
+        return count.orElse(0L);
+    }
 //
 //    public List<Person> getDirectorsWithoutOscars(){
 //
