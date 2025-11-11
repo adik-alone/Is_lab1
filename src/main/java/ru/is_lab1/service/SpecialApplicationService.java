@@ -34,10 +34,11 @@ public class SpecialApplicationService {
         logger.info("SpecialService.deleteOneMovieGenre: end");
     }
 
-//    public List<Long> groupMovieByTotalBoxOffice(){
-//
-//    }
-//
+    public List<Long> groupMovieByTotalBoxOffice(){
+        logger.info(" ===== SpecialService.groupMovieByTotalBoxOffice: run ======");
+        return repository.groupMovieByTotalBoxOffice();
+    }
+
 //    public Long movieWithGoldenPalmEqualsValue(){
 //
 //    }

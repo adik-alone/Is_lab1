@@ -31,8 +31,13 @@ public class MovieRepository extends AbstractRepository<Movie>{
     }
 
     public Optional<Movie> getOneMovieByGenre(String genre){
-        return Optional.ofNullable(em.createQuery("Select m FROM Movie m WHERE m.genre LIKE :genre", Movie.class)
+        return Optional.ofNullable(em.createQuery("SELECT m FROM Movie m WHERE m.genre LIKE :genre", Movie.class)
                 .setParameter("genre", genre)
                 .getSingleResult());
+    }
+
+    public List<Long> groupMovieByTotalBoxOffice(){
+        return em.createQuery("SELECT count(m) FROM Movie m GROUP BY m.totalBoxOffice", Long.class)
+                .getResultList();
     }
 }

@@ -7,6 +7,8 @@ import jakarta.ws.rs.core.Response;
 import ru.is_lab1.entity.enums.MovieGenre;
 import ru.is_lab1.service.SpecialApplicationService;
 
+import java.util.List;
+
 @Path("/special")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,5 +21,12 @@ public class SpecialApplicationController {
     public Response deleteOneMovieByGenre(@QueryParam("genre") MovieGenre genre){
         service.deleteOneMovieGenre(genre);
         return Response.noContent().build();
+    }
+
+    @GET
+    @Path("/group-movie-by-box-office")
+    public Response groupMovieByTotalBoxOffice(){
+        List<Long> groupList = service.groupMovieByTotalBoxOffice();
+        return Response.ok(groupList).build();
     }
 }
