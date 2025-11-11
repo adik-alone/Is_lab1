@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ru.is_lab1.entity.Movie;
 import ru.is_lab1.entity.Person;
 import ru.is_lab1.entity.enums.MovieGenre;
 import ru.is_lab1.service.SpecialApplicationService;
@@ -43,5 +44,13 @@ public class SpecialApplicationController {
     public Response getDirectorsWithoutOscars(){
         List<Person> directors = service.getDirectorsWithoutOscars();
         return Response.ok(directors).build();
+    }
+
+    @PUT
+    @Path("/rebalance-oscars")
+    public Response reBalanceOscarsInOtherGenre(@QueryParam("FromGenre") MovieGenre genreFrom,
+                                                @QueryParam("ToGenre") MovieGenre genreTo){
+       service.reBalanceOscarsInOtherGenre(genreFrom, genreTo);
+       return Response.noContent().build();
     }
 }

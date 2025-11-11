@@ -54,7 +54,7 @@ public class MovieService {
         Movie updatedMovie = optionalMovie.get();
         mapper.updateEntity(request, updatedMovie);
         logger.info("MovieService.updateMovie: end");
-        return updatedMovie;
+        return repository.update(updatedMovie);
     }
 
     @Transactional
