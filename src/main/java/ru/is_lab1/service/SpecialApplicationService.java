@@ -89,7 +89,7 @@ public class SpecialApplicationService {
             countOscars += m.getOscarsCount();
         }
         long oscarsToEach = countOscars / moviesTo.size();
-        if (oscarsToEach < moviesTo.size()){
+        if (oscarsToEach < 1){
             throw new RuntimeException("Not enough oscars to perform this operation");
         }
         for (Movie mTo: moviesTo){
