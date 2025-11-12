@@ -42,7 +42,7 @@ public class CoordinatesController {
     @PUT
     @Path("/{id}")
     public Response updateCoordinates(@PathParam("id") Long id,
-                                      CoordinatesRequest request){
+                                      @Valid CoordinatesRequest request){
         Coordinates updatedCoordinates = service.updateCoordinates(id, request);
         return Response.ok(updatedCoordinates).build();
     }

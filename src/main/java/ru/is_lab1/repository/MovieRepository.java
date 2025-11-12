@@ -1,5 +1,6 @@
 package ru.is_lab1.repository;
 
+import jakarta.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.entity.Movie;
@@ -46,5 +47,37 @@ public class MovieRepository extends AbstractRepository<Movie>{
         return Optional.ofNullable(em.createQuery("SELECT count(m) FROM Movie m WHERE m.goldenPalmCount = :value", Long.class)
                 .setParameter("value", value)
                 .getSingleResult());
+    }
+
+    public List<Movie> findWithFilterAndSorted(int page, int size, String filterColumn, String filterValue, String sortedColumn, boolean asc) {
+        String query = "SELECT m FROM Movie m";
+        String filter = "";
+        String sorted = "";
+        String ascStr = " ASC";
+
+        boolean isFilterValid = (filterColumn != null && filterValue != null) && (!filterColumn.isEmpty() && !filterValue.isEmpty());
+
+        if(isFilterValid){
+            filter = " WHERE m." + filterColumn.toLowerCase() + " LIKE :filterValue";
+            query += filter;
+        }
+
+        if (sortedColumn != null && !sortedColumn.isEmpty()){
+            sorted = " ORDER BY m." + sortedColumn.toLowerCase();
+            if (!asc){
+                ascStr = " DESC";
+            }
+            sorted = sorted + ascStr;
+            query += sorted;
+        }
+        TypedQuery<Movie> typedQuery = em.createQuery(query, Movie.class);
+
+        if (isFilterValid){
+            typedQuery.setParameter("filterValue", filterValue);
+        }
+        typedQuery
+                .setFirstResult((page - 1) * size)
+                .setMaxResults(size);
+        return typedQuery.getResultList();
     }
 }

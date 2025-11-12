@@ -58,6 +58,4 @@ public class UserResource {
         userService.deleteUser(id);
         return Response.status(Response.Status.OK).build();
     }
-
-
 }

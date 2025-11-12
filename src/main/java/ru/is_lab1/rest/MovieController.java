@@ -42,7 +42,7 @@ public class MovieController {
     @PUT
     @Path("/{id}")
     public Response updateMovie(@PathParam("id") Long id,
-                                MovieRequest request){
+                                @Valid MovieRequest request){
         Movie updatedMovie = service.updateMovie(id, request);
         return Response.ok(updatedMovie).build();
     }
@@ -52,5 +52,17 @@ public class MovieController {
     public Response deleteMovie(@PathParam("id") Long id){
         service.deleteMovie(id);
         return Response.noContent().build();
+    }
+
+    @GET
+    @Path("/filtered-sorted-{page}-by-{size}")
+    public Response getPageWithFilterAndSort(@PathParam("page") int page,
+                                             @PathParam("size") int size,
+                                             @QueryParam("filterColumn") String filterColumn,
+                                             @QueryParam("filterValue") String filterValue,
+                                             @QueryParam("sortedColumn") String sortedColumn,
+                                             @QueryParam("asc") boolean asc){
+        List<Movie> movies = service.getPageFilterAndSortMovie(page, size, filterColumn, filterValue, sortedColumn, asc);
+        return Response.ok(movies).build();
     }
 }

@@ -44,6 +44,14 @@ public class MovieService {
         return repository.findPage(page, size);
     }
 
+    public List<Movie> getPageFilterAndSortMovie(int page, int size,
+                                                 String filterColumn, String filterValue,
+                                                 String sortedColumn,
+                                                 boolean asc){
+        return repository.findWithFilterAndSorted(page, size, filterColumn, filterValue, sortedColumn, asc);
+
+    }
+
     @Transactional
     public Movie updateMovie(Long id, MovieRequest request){
         logger.info("MovieService.updateMovie: start");

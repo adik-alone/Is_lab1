@@ -19,7 +19,7 @@ public class LocationController {
     LocationService service;
 
     @POST
-    public Response createLocation(LocationRequest request){
+    public Response createLocation(@Valid LocationRequest request){
         Location createdLocation = service.createLocation(request);
         return Response.status(Response.Status.CREATED).entity(createdLocation).build();
     }
