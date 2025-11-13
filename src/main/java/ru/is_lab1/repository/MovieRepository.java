@@ -63,7 +63,7 @@ public class MovieRepository extends AbstractRepository<Movie>{
         }
 
         if (sortedColumn != null && !sortedColumn.isEmpty()){
-            sorted = " ORDER BY m." + sortedColumn.toLowerCase();
+            sorted = " ORDER BY m." + sortedColumn;
             if (!asc){
                 ascStr = " DESC";
             }

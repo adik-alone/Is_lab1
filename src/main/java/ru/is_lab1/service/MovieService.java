@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.dto.request.MovieRequest;
 import ru.is_lab1.entity.Movie;
+import ru.is_lab1.exceptions.RepositoryException;
 import ru.is_lab1.mapper.MovieMapper;
 import ru.is_lab1.repository.MovieRepository;
 
@@ -35,7 +36,7 @@ public class MovieService {
     public Movie getMovieById(Long id){
         Optional<Movie> optionalMovie = repository.findById(id);
         if (optionalMovie.isEmpty()){
-            throw new RuntimeException("Movie not found");
+            throw new RepositoryException("Movie not found");
         }
         return optionalMovie.get();
     }
