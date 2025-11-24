@@ -23,13 +23,11 @@ public class LocationService {
     private LocationRepository repository;
 
     @Inject
-//    private ModelMapper modelMapper;
     private LocationMapper mapper;
 
 
     @Transactional
     public Location createLocation(LocationRequest request){
-//        Location location = modelMapper.map(request, Location.class);
         Location location = mapper.toEntity(request);
         return repository.save(location);
     }
