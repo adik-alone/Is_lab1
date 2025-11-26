@@ -2,6 +2,7 @@ package ru.is_lab1.repository;
 
 import ru.is_lab1.entity.User;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,5 +24,10 @@ public class UserRepository extends AbstractRepository<User> {
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)
                 .getResultList();
+    }
+    public Optional<User> findByLogin(String login){
+        return Optional.ofNullable(em.createQuery("SELECT u FROM User u WHERE u.login LIKE :login", User.class)
+                .setParameter("login", login)
+                .getSingleResult());
     }
 }

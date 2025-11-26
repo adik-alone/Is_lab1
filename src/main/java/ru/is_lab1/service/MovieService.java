@@ -72,5 +72,4 @@ public class MovieService {
             throw new RuntimeException("Movie not found");
         }
     }
-
 }

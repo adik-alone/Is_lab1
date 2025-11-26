@@ -13,6 +13,8 @@
         <class>ru.is_lab1.entity.Coordinates</class>
         <class>ru.is_lab1.entity.Person</class>
         <class>ru.is_lab1.entity.Movie</class>
+        <class>ru.is_lab1.entity.Import</class>
+        <class>ru.is_lab1.entity.User</class>
 
         <properties>
             <!-- Автоматическое создание таблиц и последовательностей -->

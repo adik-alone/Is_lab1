@@ -2,6 +2,7 @@ package ru.is_lab1.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import ru.is_lab1.entity.enums.Role;
 
 @Entity
 @Data
@@ -14,4 +15,7 @@ public class User extends AbstractEntity {
     private String login;
     @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

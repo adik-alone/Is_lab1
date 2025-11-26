@@ -1,17 +1,13 @@
-package ru.is_lab1.dto.request;
+package ru.is_lab1.dto.request.upload;
 
-import jakarta.persistence.Column;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import ru.is_lab1.entity.enums.Color;
 import ru.is_lab1.entity.enums.Country;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class PersonRequest {
+public class UploadPerson {
     @NotNull(message = "Name couldn't be null")
     @NotEmpty(message = "Name couldn't be empty")
     private String name;
@@ -22,7 +18,8 @@ public class PersonRequest {
     @NotNull(message = "hairColor couldn't be null")
     private Color hairColor;
 
-    private Long location;
+    @Valid
+    private UploadLocation location;
 
     @Min(value = 0, message = "Height must be more than 0")
     @Max(value = 300, message = "Height must be less than 300")

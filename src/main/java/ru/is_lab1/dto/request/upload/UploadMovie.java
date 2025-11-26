@@ -1,28 +1,24 @@
-package ru.is_lab1.dto.request;
+package ru.is_lab1.dto.request.upload;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import ru.is_lab1.dto.base.MovieDTO;
-import ru.is_lab1.entity.Coordinates;
-import ru.is_lab1.entity.Person;
 import ru.is_lab1.entity.enums.MovieGenre;
 import ru.is_lab1.entity.enums.MpaaRating;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class MovieRequest extends MovieDTO {
+public class UploadMovie extends MovieDTO {
     @NotNull(message = "Name couldn't be null")
     @NotEmpty(message = "Name couldn't be empty")
     private String name;
 
     @NotNull(message = "Coordinates couldn't be null")
-    private Long coordinates;
+    @Valid
+    private UploadCoordinates coordinates;
 
     @Min(value = 0, message = "Oscars must be more than 0")
     private long oscarsCount;
@@ -37,12 +33,15 @@ public class MovieRequest extends MovieDTO {
     private MpaaRating mpaaRating;
 
     @NotNull(message = "Director couldn't be null")
-    private Long director;
+    @Valid
+    private UploadPerson director;
 
-    private Long screenwriter;
+    @Valid
+    private UploadPerson screenwriter;
 
     @NotNull(message = "Operator couldn't be null")
-    private Long operator;
+    @Valid
+    private UploadPerson operator;
 
     @Min(value = 0, message = "Length must be more than 0")
     @Max(value = 600, message = "Length must be less than 600")

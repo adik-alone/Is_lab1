@@ -2,13 +2,14 @@ package ru.is_lab1.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserRequest {
     @NotNull(message = "login couldn't be null")
     @NotBlank(message = "login couldn't be blank")

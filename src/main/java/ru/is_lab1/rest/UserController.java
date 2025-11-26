@@ -24,6 +24,13 @@ public class UserController {
         return Response.ok(user).build();
     }
 
+    @POST
+    @Path("/auth")
+    public Response auth(@Valid UserRequest request){
+        boolean auth = service.isUserValid(request);
+        return auth ? Response.noContent().build() : Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
     @GET
     @Path("/{id}")
     public Response getUserById(@PathParam("id") Long id){

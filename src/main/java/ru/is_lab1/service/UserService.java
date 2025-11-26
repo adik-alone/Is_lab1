@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.dto.request.UserRequest;
 import ru.is_lab1.entity.User;
+import ru.is_lab1.entity.enums.Role;
 import ru.is_lab1.exceptions.RepositoryException;
 import ru.is_lab1.mapper.UserMapper;
 import ru.is_lab1.repository.UserRepository;
@@ -26,11 +27,28 @@ public class UserService {
     @Transactional
     public User createUser(UserRequest request){
         User user = mapper.toEntity(request);
+        user.setRole(Role.USER);
         return repository.save(user);
     }
 
     public User getUserById(Long id){
         return repository.findById(id).orElse(null);
+    }
+
+    public User getUserByLogin(String login){
+        logger.info("getUserByLogin: start");
+        Optional<User> optionalUser = repository.findByLogin(login);
+        logger.info("getUserByLogin: operation success");
+        if (optionalUser.isEmpty())
+            throw new RepositoryException("User not found");
+        return optionalUser.get();
+    }
+
+    public boolean isUserValid(UserRequest userRequest){
+        logger.info("isUserValid: start");
+        User user = getUserByLogin(userRequest.getLogin());
+        logger.info("isUserValid: get User");
+        return user.getPassword().equals(userRequest.getPassword());
     }
 
     public List<User> getAll(){
@@ -57,5 +75,10 @@ public class UserService {
         if(!repository.delete(id)){
             throw new RepositoryException("User not found");
         }
+    }
+
+    public Role getRole(Long id){
+        User user = getUserById(id);
+        return user.getRole();
     }
 }

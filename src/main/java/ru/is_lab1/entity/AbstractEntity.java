@@ -13,5 +13,6 @@ import lombok.Setter;
 public class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "id")
     private Long id;
 }
