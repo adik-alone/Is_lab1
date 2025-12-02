@@ -1,6 +1,5 @@
 package ru.is_lab1.service;
 
-import ch.qos.logback.core.model.Model;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -10,16 +9,14 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.dto.request.ImportRequest;
-import ru.is_lab1.dto.request.LocationRequest;
 import ru.is_lab1.dto.request.upload.UploadMovie;
 import ru.is_lab1.entity.Coordinates;
 import ru.is_lab1.entity.Import;
 import ru.is_lab1.entity.Movie;
 import ru.is_lab1.entity.Person;
 import ru.is_lab1.entity.enums.Role;
-import ru.is_lab1.exceptions.ImportException;
+import ru.is_lab1.exceptions.exception.ImportException;
 import ru.is_lab1.mapper.ImportMapper;
-import ru.is_lab1.mapper.LocationMapper;
 import ru.is_lab1.repository.*;
 
 import java.io.IOException;

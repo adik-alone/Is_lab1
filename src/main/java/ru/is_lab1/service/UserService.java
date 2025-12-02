@@ -2,13 +2,12 @@ package ru.is_lab1.service;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import org.postgresql.jdbc.PreferQueryMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.dto.request.UserRequest;
 import ru.is_lab1.entity.User;
 import ru.is_lab1.entity.enums.Role;
-import ru.is_lab1.exceptions.RepositoryException;
+import ru.is_lab1.exceptions.exception.RepositoryException;
 import ru.is_lab1.mapper.UserMapper;
 import ru.is_lab1.repository.UserRepository;
 

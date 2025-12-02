@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ru.is_lab1.dto.request.MovieRequest;
 import ru.is_lab1.entity.Movie;
+import ru.is_lab1.exceptions.exception.NotFoundException;
 import ru.is_lab1.service.MovieService;
 
 import java.util.List;
@@ -27,8 +28,12 @@ public class MovieController {
     @GET
     @Path("/{id}")
     public Response getMovieById(@PathParam("id") Long id){
-        Movie movie = service.getMovieById(id);
-        return Response.ok(movie).build();
+        try{
+            Movie movie = service.getMovieById(id);
+            return Response.ok(movie).build();
+        }catch (NotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 
     @GET
@@ -43,14 +48,22 @@ public class MovieController {
     @Path("/{id}")
     public Response updateMovie(@PathParam("id") Long id,
                                 @Valid MovieRequest request){
-        Movie updatedMovie = service.updateMovie(id, request);
-        return Response.ok(updatedMovie).build();
+        try {
+            Movie updatedMovie = service.updateMovie(id, request);
+            return Response.ok(updatedMovie).build();
+        }catch (NotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
     }
 
     @DELETE
     @Path("/{id}")
     public Response deleteMovie(@PathParam("id") Long id){
-        service.deleteMovie(id);
+        try {
+            service.deleteMovie(id);
+        }catch (NotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
         return Response.noContent().build();
     }
 

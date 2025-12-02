@@ -2,18 +2,16 @@ package ru.is_lab1.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.interceptor.Interceptors;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.dto.request.MovieRequest;
 import ru.is_lab1.entity.Movie;
-import ru.is_lab1.exceptions.RepositoryException;
+import ru.is_lab1.exceptions.exception.NotFoundException;
+import ru.is_lab1.exceptions.exception.RepositoryException;
 import ru.is_lab1.mapper.MovieMapper;
 import ru.is_lab1.repository.MovieRepository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,10 +31,10 @@ public class MovieService {
         return repository.save(createdMovie);
     }
 
-    public Movie getMovieById(Long id){
+    public Movie getMovieById(Long id) throws NotFoundException{
         Optional<Movie> optionalMovie = repository.findById(id);
         if (optionalMovie.isEmpty()){
-            throw new RepositoryException("Movie not found");
+            throw new NotFoundException("Movie not found");
         }
         return optionalMovie.get();
     }
@@ -54,11 +52,11 @@ public class MovieService {
     }
 
     @Transactional
-    public Movie updateMovie(Long id, MovieRequest request){
+    public Movie updateMovie(Long id, MovieRequest request) throws NotFoundException{
         logger.info("MovieService.updateMovie: start");
         Optional<Movie> optionalMovie = repository.findById(id);
         if (optionalMovie.isEmpty()){
-            throw new RuntimeException("Movie not found");
+            throw new NotFoundException("Movie not found");
         }
         Movie updatedMovie = optionalMovie.get();
         mapper.updateEntity(request, updatedMovie);
@@ -67,9 +65,9 @@ public class MovieService {
     }
 
     @Transactional
-    public void deleteMovie(Long id){
+    public void deleteMovie(Long id)throws NotFoundException {
         if(!repository.delete(id)){
-            throw new RuntimeException("Movie not found");
+            throw new NotFoundException("Movie not found");
         }
     }
 }

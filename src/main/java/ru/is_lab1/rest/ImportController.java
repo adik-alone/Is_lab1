@@ -49,7 +49,8 @@ public class ImportController {
         } catch (Exception e) {
             logger.info("ImportFromFile: something fails");
             importService.createImportResult(new ImportRequest(false, 0L), userService.getUserByLogin(userRequest.getLogin()).getId());
-            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file: " + e.getMessage() + " Error type: " + e.getClass()).build();
+//            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file: " + e.getMessage() + " Error type: " + e.getClass()).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file").build();
 //            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file: " + e.getMessage() + " Error type: " + e.getClass() + "\n" + Arrays.toString(e.getStackTrace())).build();
         }
     }
