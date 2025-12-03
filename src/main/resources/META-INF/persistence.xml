@@ -6,7 +6,9 @@
 
     <persistence-unit name="myPostgresPU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>java:/jboss/datasource/MyPostgresDS</jta-data-source>
+<!--        <jta-data-source>java:/jboss/datasource/MyPostgresDS</jta-data-source>-->
+        <jta-data-source>java:/jdbc/DruidPostgresDS</jta-data-source>
+<!--        <jta-data-source>java:jboss/datasource/DruidDS</jta-data-source>-->
 
         <class>com.example.entity.Product</class>
         <class>ru.is_lab1.entity.Location</class>
@@ -17,10 +19,10 @@
         <class>ru.is_lab1.entity.User</class>
 
         <properties>
-            <!-- Автоматическое создание таблиц и последовательностей -->
+<!--             Автоматическое создание таблиц и последовательностей -->
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
-
+            <property name="jakarta.persistence.provider" value="org.eclipse.persistence.jpa.PersistenceProvider"/>
             <!-- Показывать SQL запросы -->
 <!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
             <property name="eclipselink.logging.level" value="FINE"/>
