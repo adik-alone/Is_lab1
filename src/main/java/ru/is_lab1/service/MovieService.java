@@ -3,9 +3,11 @@ package ru.is_lab1.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.dto.request.MovieRequest;
+import ru.is_lab1.dto.request.upload.UploadMovie;
 import ru.is_lab1.entity.Movie;
 import ru.is_lab1.exceptions.exception.NotFoundException;
 import ru.is_lab1.exceptions.exception.RepositoryException;
@@ -23,6 +25,9 @@ public class MovieService {
 
     @Inject
     MovieMapper mapper;
+
+    @Inject
+    ModelMapper modelMapper;
 
     @Transactional
     public Movie createMovie(MovieRequest request){
@@ -63,6 +68,13 @@ public class MovieService {
         logger.info("MovieService.updateMovie: end");
         return repository.update(updatedMovie);
     }
+
+
+//    @Transactional
+//    public void uploadMoviesToMovies(List<Movie> newMovies, List<UploadMovie> uploadMovies){
+//
+//
+//    }
 
     @Transactional
     public void deleteMovie(Long id)throws NotFoundException {

@@ -8,6 +8,7 @@ import ru.is_lab1.dto.request.UserRequest;
 import ru.is_lab1.entity.User;
 import ru.is_lab1.entity.enums.Role;
 import ru.is_lab1.exceptions.exception.RepositoryException;
+import ru.is_lab1.exceptions.exception.UserNotFoundException;
 import ru.is_lab1.mapper.UserMapper;
 import ru.is_lab1.repository.UserRepository;
 
@@ -38,8 +39,10 @@ public class UserService {
         logger.info("getUserByLogin: start");
         Optional<User> optionalUser = repository.findByLogin(login);
         logger.info("getUserByLogin: operation success");
-        if (optionalUser.isEmpty())
-            throw new RepositoryException("User not found");
+        if (optionalUser.isEmpty()) {
+            logger.info("User not found =========> {}", login);
+            throw new UserNotFoundException("User not found");
+        }
         return optionalUser.get();
     }
 

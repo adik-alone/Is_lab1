@@ -17,4 +17,6 @@ public class Import extends OwnedEntity {
     private Boolean isSuccess;
     @Column(name = "count")
     private Long count;
+    @Column(name = "url")
+    private String url;
 }

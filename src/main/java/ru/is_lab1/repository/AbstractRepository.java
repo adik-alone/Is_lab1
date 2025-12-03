@@ -31,4 +31,8 @@ public abstract class AbstractRepository<T extends AbstractEntity> implements Re
         em.getTransaction().commit();
         return true;
     }
+
+    public boolean isTransactionActive(){
+        return em.getTransaction().isActive();
+    }
 }

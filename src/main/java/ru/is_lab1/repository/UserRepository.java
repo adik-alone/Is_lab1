@@ -1,5 +1,6 @@
 package ru.is_lab1.repository;
 
+import jakarta.transaction.Transactional;
 import ru.is_lab1.entity.User;
 
 import javax.swing.text.html.Option;
@@ -26,8 +27,13 @@ public class UserRepository extends AbstractRepository<User> {
                 .getResultList();
     }
     public Optional<User> findByLogin(String login){
-        return Optional.ofNullable(em.createQuery("SELECT u FROM User u WHERE u.login LIKE :login", User.class)
-                .setParameter("login", login)
-                .getSingleResult());
+        try {
+            return Optional.ofNullable(em.createQuery("SELECT u FROM User u WHERE u.login LIKE :login", User.class)
+                    .setParameter("login", login)
+                    .getSingleResult());
+        }catch (Exception e){
+            return Optional.empty();
+//            throw new RuntimeException("Error with finding User: " + e.getMessage());
+        }
     }
 }

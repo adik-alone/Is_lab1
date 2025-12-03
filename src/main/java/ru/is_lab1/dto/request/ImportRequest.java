@@ -10,4 +10,5 @@ import lombok.RequiredArgsConstructor;
 public class ImportRequest {
     private Boolean isSuccess;
     private Long count;
+    private String url;
 }

@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,20 +38,22 @@ public class ImportController {
         logger.info("ImportFromFile: start");
         UserRequest userRequest = new UserRequest(form.getLogin(), form.getPassword());
         if (!userService.isUserValid(userRequest)) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
         logger.info("ImportFromFile: user valid");
         try {
             logger.info("ImportFromFile: start importing");
             logger.info("ImportFromFile: form ==> {}", form);
-            List<Movie> uploadedMovies = importService.importMovies(form.getFile());
-            importService.createImportResult(new ImportRequest(true, (long) uploadedMovies.size()), userService.getUserByLogin(userRequest.getLogin()).getId());
+            Pair<List<Movie>, String> pair = importService.importMovies(form.getFile(), userService.getUserByLogin(userRequest.getLogin()).getId());
+            List<Movie> uploadedMovies = pair.getLeft();
+//            String fileUrl = pair.getRight();
+//            importService.createImportResult(new ImportRequest(true, (long) uploadedMovies.size(), fileUrl), userService.getUserByLogin(userRequest.getLogin()).getId());
             return Response.ok(uploadedMovies).build();
         } catch (Exception e) {
             logger.info("ImportFromFile: something fails");
-            importService.createImportResult(new ImportRequest(false, 0L), userService.getUserByLogin(userRequest.getLogin()).getId());
-//            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file: " + e.getMessage() + " Error type: " + e.getClass()).build();
             return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file").build();
+//            importService.createImportResult(new ImportRequest(false, 0L, null), userService.getUserByLogin(userRequest.getLogin()).getId());
+//            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file: " + e.getMessage() + " Error type: " + e.getClass()).build();
 //            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file: " + e.getMessage() + " Error type: " + e.getClass() + "\n" + Arrays.toString(e.getStackTrace())).build();
         }
     }
