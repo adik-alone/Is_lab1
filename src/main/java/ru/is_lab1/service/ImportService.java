@@ -72,15 +72,25 @@ public class ImportService {
 
 
         logger.info("importMovies: start");
-        Pair<String, String> pair = minIOService.uploadFile(fileMinio);
+        Pair<String, String> pair = Pair.of(null, null);
+        try {
+            pair = minIOService.uploadFile(fileMinio);
+        }catch (Exception e){
+//            logger.info("Error heh, import creating");
+            Import error_import = createImportResult(new ImportRequest(false, 0L, null), userId);
+//            logger.info("Error import is " + error_import);
+            throw new ImportException("Error while saving file" + e.getMessage());
+        }
         try{
             List<Movie> movies = saveMovie(fileDB);
             createImportResult(new ImportRequest(true, (long) movies.size(), pair.getLeft()), userId);
             return Pair.of(movies, pair.getLeft());
         }catch (Exception e) {
+//            logger.info("I'm Here");
             minIOService.deleteFile(pair.getRight());
-            createImportResult(new ImportRequest(false, 0L, null), userId);
-            logger.info("importMovies: something fails");
+            Import error_import = createImportResult(new ImportRequest(false, 0L, null), userId);
+//            logger.info("Error import is ==> {}", error_import);
+//            logger.info("importMovies: something fails");
             throw new ImportException("Error while reading file: " + e.getMessage());
         }
     }
@@ -126,9 +136,14 @@ public class ImportService {
 
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public Import createImportResult(ImportRequest request, Long id ){
+        logger.info("In creating import");
+        logger.info("User id = " + id);
         Import importResult = modelMapper.map(request, Import.class);
         importResult.setUserId(id);
-        return repository.save(importResult);
+        logger.info("Import Result = " + importResult);
+        Import newImport = repository.save(importResult);
+        logger.info("New import = " + newImport );
+        return newImport;
     }
 
     public List<Import> getAll(){

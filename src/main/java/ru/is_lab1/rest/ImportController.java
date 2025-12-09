@@ -51,6 +51,7 @@ public class ImportController {
             return Response.ok(fileUrl).build();
         } catch (Exception e) {
             logger.info("ImportFromFile: something fails");
+            Import error_import = importService.createImportResult(new ImportRequest(false, 0L, null), userService.getUserByLogin(userRequest.getLogin()).getId());
             return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file").build();
 //            importService.createImportResult(new ImportRequest(false, 0L, null), userService.getUserByLogin(userRequest.getLogin()).getId());
 //            return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file: " + e.getMessage() + " Error type: " + e.getClass()).build();

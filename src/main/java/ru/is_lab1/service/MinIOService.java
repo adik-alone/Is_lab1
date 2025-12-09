@@ -1,8 +1,7 @@
 package ru.is_lab1.service;
 
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
-import io.minio.RemoveObjectArgs;
+import io.minio.*;
+import io.minio.http.Method;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.apache.commons.io.IOUtils;
@@ -10,12 +9,14 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.is_lab1.config.MinioConfig;
+import ru.is_lab1.exceptions.exception.MinIOException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import static ru.is_lab1.config.MinioConfig.BUCKET_NAME;
 import static ru.is_lab1.config.MinioConfig.ENDPOINT;
@@ -32,7 +33,7 @@ public class MinIOService {
     private MinioClient client;
 
 
-    public Pair<String, String> uploadFile(InputStream fileMinio){
+    public Pair<String, String> uploadFile(InputStream fileMinio) throws MinIOException {
         activateClient();
         try{
             String fileId = UUID.randomUUID().toString();
@@ -46,18 +47,34 @@ public class MinIOService {
                             .contentType(contentType)
                             .build()
             );
+            String downloadUrl = client.getPresignedObjectUrl(
+                    GetPresignedObjectUrlArgs.builder()
+                            .method(Method.GET)
+                            .bucket(BUCKET_NAME)
+                            .object(objectName)
+                            .expiry(356, TimeUnit.DAYS)
+                            .build()
+            );
 
             String fileUrl = String.format("%s/%s/%s", ENDPOINT, BUCKET_NAME, objectName);
-            return Pair.of(fileUrl, objectName);
+            return Pair.of(downloadUrl, objectName);
 
         } catch (Exception e) {
             logger.error("Error in uploading file", e);
-            throw new RuntimeException(e);
+            throw new MinIOException(e.getMessage());
         }
     }
     public void deleteFile(String objectName){
         try {
             if (objectName != null) {
+//                Object obj;
+//                obj = client.getObject(
+//                        GetObjectArgs.builder()
+//                                .bucket(BUCKET_NAME)
+//                                .object(objectName)
+//                                .build()
+//                );
+//                if (obj == null) return;
                 client.removeObject(
                         RemoveObjectArgs.builder()
                                 .bucket(BUCKET_NAME)

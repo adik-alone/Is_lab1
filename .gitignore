@@ -33,6 +33,7 @@ build/
 
 ### VS Code ###
 .vscode/
+/minio/data/movies-file
 
 ### Mac OS ###
 .DS_Store
