@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.is_lab1.cache.L2Cached;
 import ru.is_lab1.dto.request.MovieRequest;
 import ru.is_lab1.dto.request.upload.UploadMovie;
 import ru.is_lab1.entity.Movie;
@@ -35,15 +36,25 @@ public class MovieService {
         createdMovie.setCreationDate(java.time.LocalDate.now());
         return repository.save(createdMovie);
     }
-
+    @L2Cached
     public Movie getMovieById(Long id) throws NotFoundException{
+//        String cacheKey = "Movie:" + id;
+//        logger.info("Cache key ====> {}", cacheKey);
+//        Movie cached = (Movie) infinispanCache.get(cacheKey);
+//        if (cached != null){
+//            logger.info("Find in cache ====> {}", cached);
+//            return cached;
+//        }
+
         Optional<Movie> optionalMovie = repository.findById(id);
         if (optionalMovie.isEmpty()){
             throw new NotFoundException("Movie not found");
         }
+//        infinispanCache.put(cacheKey, optionalMovie.get());
         return optionalMovie.get();
     }
 
+    @L2Cached
     public List<Movie> getPageMovie(int page, int size){
         return repository.findPage(page, size);
     }

@@ -3,6 +3,13 @@
     <deployment>
         <dependencies>
             <module name="com.alibaba.druid" export="true" />
+            <module name="org.infinispan"/>
+            <module name="org.infinispan.commons"/>
+<!--            <module name="org.infinispan.embedded"/>-->
         </dependencies>
+        <exclusions>
+            <module name="org.infinispan"/>
+            <module name="org.infinispan.commons"/>
+        </exclusions>
     </deployment>
 </jboss-deployment-structure>

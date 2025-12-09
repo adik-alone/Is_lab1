@@ -6,10 +6,12 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 import ru.is_lab1.entity.enums.MovieGenre;
 import ru.is_lab1.entity.enums.MpaaRating;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "ms_movie")
 @Data
-public class Movie extends AbstractEntity{
+public class Movie extends AbstractEntity implements Serializable {
 
     @Column(name = "name", nullable = false)
     private String name; //Поле не может быть null, Строка не может быть пустой

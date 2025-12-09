@@ -46,9 +46,9 @@ public class ImportController {
             logger.info("ImportFromFile: form ==> {}", form);
             Pair<List<Movie>, String> pair = importService.importMovies(form.getFile(), userService.getUserByLogin(userRequest.getLogin()).getId());
             List<Movie> uploadedMovies = pair.getLeft();
-//            String fileUrl = pair.getRight();
+            String fileUrl = pair.getRight();
 //            importService.createImportResult(new ImportRequest(true, (long) uploadedMovies.size(), fileUrl), userService.getUserByLogin(userRequest.getLogin()).getId());
-            return Response.ok(uploadedMovies).build();
+            return Response.ok(fileUrl).build();
         } catch (Exception e) {
             logger.info("ImportFromFile: something fails");
             return Response.status(Response.Status.BAD_REQUEST).entity("Error in import file").build();

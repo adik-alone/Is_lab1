@@ -3,6 +3,7 @@ package ru.is_lab1.repository;
 import jakarta.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.is_lab1.cache.L2Cached;
 import ru.is_lab1.entity.Movie;
 import ru.is_lab1.entity.enums.MovieGenre;
 
@@ -14,6 +15,7 @@ public class MovieRepository extends AbstractRepository<Movie>{
 
     @Override
     public Optional<Movie> findById(Long id) {
+        logger.info("findById");
         return Optional.ofNullable(em.find(Movie.class, id));
     }
 
@@ -25,6 +27,7 @@ public class MovieRepository extends AbstractRepository<Movie>{
 
     @Override
     public List<Movie> findPage(int page, int size) {
+        logger.info("findPage");
         return em.createQuery("SELECT m FROM Movie m", Movie.class)
                 .setFirstResult((page - 1) * size)
                 .setMaxResults(size)

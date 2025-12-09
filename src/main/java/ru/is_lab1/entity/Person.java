@@ -7,10 +7,12 @@ import org.eclipse.persistence.annotations.CascadeOnDelete;
 import ru.is_lab1.entity.enums.Color;
 import ru.is_lab1.entity.enums.Country;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "ms_person")
 @Data
-public class Person extends AbstractEntity{
+public class Person extends AbstractEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name; //Поле не может быть null, Строка не может быть пустой
 
